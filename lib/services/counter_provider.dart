@@ -23,7 +23,8 @@ class CounterProvider with ChangeNotifier {
   }
 
   startPauseCounter() {
-    if (!_animationController.isAnimating) {
+    if (!_animationController.isAnimating &&
+        _choosedDuration != {'h': 0, 'm': 0, 's': 0}) {
       if (_animationController.value == 0) {
         _animationController = _animationController = AnimationController(
           vsync: tickerProvider,
