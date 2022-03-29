@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:counter_app/services/theme_manager.dart';
 import 'package:counter_app/theme/colors.dart';
 import 'package:counter_app/widgets/time_picker_item.dart';
