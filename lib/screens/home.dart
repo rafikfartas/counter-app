@@ -42,15 +42,15 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 child: Column(
                   children: [
                     counterProvider.animationController.value > 0
-                        ? _counterClock(counterProvider, themeNotifier)
-                        : _durationPicker(counterProvider, themeNotifier),
+                        ? _counterClock(counterProvider)
+                        : _durationPicker(counterProvider),
                     const SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          _cancelButton(counterProvider, themeNotifier),
+                          _cancelButton(counterProvider),
                           _startButton(counterProvider),
                         ],
                       ),
@@ -89,20 +89,20 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     );
   }
 
-  _cancelButton(CounterProvider counterProvider, ThemeNotifier theme) {
+  _cancelButton(CounterProvider counterProvider) {
     return CircleButton(
       onTap: () {
         counterProvider.cancelCounter();
       },
       opacity: counterProvider.animationController.value == 0 ? 0.4 : 1,
-      borderColor: theme.getTheme.primaryColor,
-      color: theme.getTheme.primaryColor,
-      textColor: theme.getTheme.primaryColor,
+      borderColor: Theme.of(context).primaryColor,
+      color: Theme.of(context).primaryColor,
+      textColor: Theme.of(context).primaryColor,
       text: "Cancel",
     );
   }
 
-  _counterClock(CounterProvider counterProvider, ThemeNotifier theme) {
+  _counterClock(CounterProvider counterProvider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -114,7 +114,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             shape: BoxShape.circle,
             border: Border.all(
               width: 2,
-              color: theme.getTheme.primaryColor,
+              color: Theme.of(context).primaryColor,
             ),
           ),
           child: Center(
@@ -123,7 +123,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               style: Theme.of(context)
                   .textTheme
                   .headline2!
-                  .copyWith(color: theme.getTheme.primaryColor),
+                  .copyWith(color: Theme.of(context).primaryColor),
             ),
           ),
         ),
@@ -131,7 +131,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     );
   }
 
-  _durationPicker(CounterProvider counterProvider, ThemeNotifier theme) {
+  _durationPicker(CounterProvider counterProvider) {
     return Column(
       children: [
         const SizedBox(height: 150),
@@ -139,7 +139,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TimePickerItem(
-              theme: theme,
               onAdd: () => counterProvider.addHours(),
               onMinus: () => counterProvider.substructHours(),
               unit: "h",
@@ -147,7 +146,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
             const SizedBox(width: 15),
             TimePickerItem(
-              theme: theme,
               onAdd: () => counterProvider.addMinutes(),
               onMinus: () => counterProvider.substructMinutes(),
               unit: "min",
@@ -155,7 +153,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ),
             const SizedBox(width: 15),
             TimePickerItem(
-              theme: theme,
               onAdd: () => counterProvider.addSeconds(),
               onMinus: () => counterProvider.substructSeconds(),
               unit: "s",

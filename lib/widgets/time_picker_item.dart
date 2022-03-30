@@ -1,15 +1,12 @@
-import 'package:counter_app/services/theme_manager.dart';
 import 'package:flutter/material.dart';
 
 class TimePickerItem extends StatelessWidget {
-  final ThemeNotifier theme;
   final int value;
   final String unit;
   final VoidCallback onAdd;
   final VoidCallback onMinus;
   const TimePickerItem({
     Key? key,
-    required this.theme,
     this.value = 0,
     this.unit = '',
     required this.onAdd,
@@ -27,7 +24,7 @@ class TimePickerItem extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            border: Border.all(width: 1, color: theme.getTheme.primaryColor),
+            border: Border.all(width: 1, color: Theme.of(context).primaryColor),
             borderRadius: BorderRadius.circular(7),
           ),
           child: Center(
@@ -36,7 +33,7 @@ class TimePickerItem extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .subtitle1!
-                  .copyWith(color: theme.getTheme.primaryColor),
+                  .copyWith(color: Theme.of(context).primaryColor),
             ),
           ),
         ),
