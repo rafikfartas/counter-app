@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:counter_app/services/counter_provider.dart';
 import 'package:counter_app/services/theme_manager.dart';
 import 'package:counter_app/theme/colors.dart';
@@ -138,26 +139,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             ],
           ),
         ),
-        // Container(
-        //   height: 300,
-        //   width: 300,
-        //   decoration: BoxDecoration(
-        //     shape: BoxShape.circle,
-        //     border: Border.all(
-        //       width: 2,
-        //       color: Theme.of(context).primaryColor,
-        //     ),
-        //   ),
-        //   child: Center(
-        //     child: Text(
-        //       counterProvider.counterText,
-        //       style: Theme.of(context)
-        //           .textTheme
-        //           .headline2!
-        //           .copyWith(color: Theme.of(context).primaryColor),
-        //     ),
-        //   ),
-        // ),
       ],
     );
   }
