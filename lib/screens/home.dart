@@ -21,21 +21,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       child: Consumer2<ThemeNotifier, CounterProvider>(
         builder: (context, themeNotifier, counterProvider, child) {
           return Scaffold(
-            appBar: AppBar(
-              title: const Text('Counter app'),
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    if (themeNotifier.getTheme.brightness == Brightness.dark) {
-                      themeNotifier.setLightMode();
-                    } else {
-                      themeNotifier.setDarkMode();
-                    }
-                  },
-                  icon: const Icon(Icons.invert_colors_on),
-                ),
-              ],
-            ),
+            appBar: _buildAppbar(themeNotifier),
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Center(
@@ -62,6 +48,28 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           );
         },
       ),
+    );
+  }
+
+  _buildAppbar(ThemeNotifier themeNotifier) {
+    return AppBar(
+      title: const Text('Counter app'),
+      actions: [
+        IconButton(
+          onPressed: () {
+            if (themeNotifier.getTheme.brightness == Brightness.dark) {
+              themeNotifier.setLightMode();
+            } else {
+              themeNotifier.setDarkMode();
+            }
+          },
+          icon: Icon(
+            themeNotifier.getTheme.brightness == Brightness.dark
+                ? Icons.wb_sunny_outlined
+                : Icons.wb_sunny,
+          ),
+        ),
+      ],
     );
   }
 
@@ -107,26 +115,49 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const SizedBox(height: 100),
-        Container(
+        SizedBox(
           height: 300,
           width: 300,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              width: 2,
-              color: Theme.of(context).primaryColor,
-            ),
-          ),
-          child: Center(
-            child: Text(
-              counterProvider.counterText,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline2!
-                  .copyWith(color: Theme.of(context).primaryColor),
-            ),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              CircularProgressIndicator(
+                value: counterProvider.animationController.value,
+                color: orange,
+                backgroundColor: Colors.transparent,
+              ),
+              Center(
+                child: Text(
+                  counterProvider.counterText,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline2!
+                      .copyWith(color: Theme.of(context).primaryColor),
+                ),
+              ),
+            ],
           ),
         ),
+        // Container(
+        //   height: 300,
+        //   width: 300,
+        //   decoration: BoxDecoration(
+        //     shape: BoxShape.circle,
+        //     border: Border.all(
+        //       width: 2,
+        //       color: Theme.of(context).primaryColor,
+        //     ),
+        //   ),
+        //   child: Center(
+        //     child: Text(
+        //       counterProvider.counterText,
+        //       style: Theme.of(context)
+        //           .textTheme
+        //           .headline2!
+        //           .copyWith(color: Theme.of(context).primaryColor),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

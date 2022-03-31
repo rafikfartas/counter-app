@@ -36,6 +36,7 @@ class CircleButton extends StatelessWidget {
         ),
         child: Center(
           child: InkWell(
+            borderRadius: BorderRadius.circular(100),
             onTap: onTap,
             child: Container(
               height: 70,
